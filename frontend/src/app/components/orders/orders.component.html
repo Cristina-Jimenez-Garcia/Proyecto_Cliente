@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #orderform="ngForm" (ngSubmit)="addOrder(orderform)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="ordersService.selectedOrder._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="name" #name="ngModel" [(ngModel)]="ordersService.selectedOrder.name" placeholder="Enter your name">
+                            </div>
+                        
+                            <div class="input-field col s12">
+                                <input type="text" name="surname" #surname="ngModel" [(ngModel)]="ordersService.selectedOrder.surname" placeholder="Enter your surname">
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="text" name="direction" #direction="ngModel" [(ngModel)]="ordersService.selectedOrder.direction" placeholder="Enter your direction">
+                            </div>
+                            
+                            <div class="input-field col s12">
+                                <input type="text" name="dished" #dished="ngModel" [(ngModel)]="ordersService.selectedOrder.dished" placeholder="Enter your dished">
+                            </div>
+
+                            <div class="card-action">
+                                <div class="input-field col s12">
+                                    <button class="btn" (click)="resetForm(orderform)">Clean</button>
+                                    <button class="btn right">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Direcction</th>
+                    <th>Dished</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of ordersService.orders" >
+                            <td id="vistaPedidos" *ngIf='identity.name===(order.name) || identity.role.indexOf("ROLE_ADMIN")>=0'>{{order.name}}</td>
+                            <td id="vistaPedidos" *ngIf='identity.name===(order.name) || identity.role.indexOf("ROLE_ADMIN")>=0'>{{order.surname}}</td>
+                            <td id="vistaPedidos" *ngIf='identity.name===(order.name) || identity.role.indexOf("ROLE_ADMIN")>=0'>{{order.direction}}</td>
+                            <td id="vistaPedidos" *ngIf='identity.name===(order.name) || identity.role.indexOf("ROLE_ADMIN")>=0'>{{order.dished}}</td>
+                            <td id="vistaPedidos" *ngIf='identity.name===(order.name) || identity.role.indexOf("ROLE_ADMIN")>=0'>
+                                <a (click)="editOrder(order)">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <a (click)="deleteOrder(order._id)">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

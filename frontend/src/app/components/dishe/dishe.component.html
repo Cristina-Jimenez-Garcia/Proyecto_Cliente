@@ -1,0 +1,113 @@
+<div id="vistaAdmin" *ngIf='identity.role.indexOf("ROLE_ADMIN")>=0'>
+    <h1>Insert new dishes</h1>
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #disheform="ngForm" (ngSubmit)="addDishe(disheform)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="dishesService.selectedDishe._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="name" #name="ngModel" [(ngModel)]="dishesService.selectedDishe.name" placeholder="Enter it name">
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="text" name="ingredients" #ingredients="ngModel" [(ngModel)]="dishesService.selectedDishe.ingredients" placeholder="Enter it ingredients">
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="text" name="price" #price="ngModel" [(ngModel)]="dishesService.selectedDishe.price" placeholder="Enter it price">
+                            </div>
+                            
+                            
+                            <!-- INICIO -->
+                            <div class="input-field col s12">
+                                
+
+                            <form action="#">
+                                <div name="restaurant" #restaurant="ngModel" [(ngModel)]="dishesService.selectedDishe.restaurant">
+                                    <div *ngFor="let restaurant of restaurants" name="opciones"  style="margin: 10px">
+                                        <p>
+                                            <label>
+                                                <input name="restaurantes" type="radio" value="restaurant.name" checked />
+                                                <span>
+                                                    {{restaurant.name}}  
+                                                </span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                            <!-- FIN -->
+                            
+
+                            <div class="input-field col s12">
+                                <input type="text" name="restaurant" #restaurant="ngModel" [(ngModel)]="dishesService.selectedDishe.restaurant" placeholder="Enter it restaurant">
+                            </div>
+
+                            <div class="card-action">
+                                <div class="input-field col s12">
+                                    <button class="btn" (click)="resetForm(disheform)">Clean</button>
+                                    <button class="btn right">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Ingredients</th>
+                    <th>Price</th>
+                    <th>Restaurant</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dishe of dishesService.dishes">
+                        <td>{{dishe.name}}</td>
+                        <td>{{dishe.ingredients}}</td>
+                        <td>{{dishe.price}}</td>
+                        <td>{{dishe.restaurant}}</td>
+                        <td>
+                            <a (click)="editDishe(dishe)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteDishe(dishe._id)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div id="vistaAdmin" *ngIf='identity.role.indexOf("ROLE_USER")>=0'>
+<div class="container">
+    <div class="row">
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Ingredients</th>
+                    <th>Price</th>
+                    <th>Restaurant</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dishe of dishesService.dishes">
+                        <td>{{dishe.name}}</td>
+                        <td>{{dishe.ingredients}}</td>
+                        <td>{{dishe.price}}</td>
+                        <td>{{dishe.restaurant}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

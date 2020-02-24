@@ -1,0 +1,74 @@
+<div id="vistaAdmin" *ngIf='identity.role.indexOf("ROLE_ADMIN")>=0'>
+<h1>Insert new restaurants</h1>
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #restaurantform="ngForm" (ngSubmit)="addRestaurant(restaurantform)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="restaurantsService.selectedRestaurant._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="name" #name="ngModel" [(ngModel)]="restaurantsService.selectedRestaurant.name" placeholder="Enter it name">
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="text" name="kind" #name="ngModel" [(ngModel)]="restaurantsService.selectedRestaurant.kind" placeholder="What kind of restaurant is it?">
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="text" name="direction" #direction="ngModel" [(ngModel)]="restaurantsService.selectedRestaurant.direction" placeholder="Enter it direction">
+                            </div>
+
+                            <div class="card-action">
+                                <div class="input-field col s12">
+                                    <button class="btn" (click)="resetForm(restaurantform)">Clean</button>
+                                    <button class="btn right">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Kind</th>
+                    <th>Direcction</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let restaurant of restaurantsService.restaurants">
+                        <td>{{restaurant.name}}</td>
+                        <td>{{restaurant.kind}}</td>
+                        <td>{{restaurant.direction}}</td>
+                        <td>
+                            <a (click)="editRestaurant(restaurant)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteRestaurant(restaurant._id)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div id="vistaUser" *ngIf='identity.role.indexOf("ROLE_USER")>=0'>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.679574465097!2d-6.053398084736472!3d37.35009397983903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d23e96440bb%3A0xa864aeb5808019d1!2sTGB%20-%20The%20Good%20Burger!5e0!3m2!1ses!2ses!4v1581962608781!5m2!1ses!2ses" width="350" height="400" frameborder="0"></iframe>
+                &nbsp;
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.6042132660286!2d-6.05896738473645!3d37.35187777983871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d26223ddaa3%3A0x19b958b81021f9ac!2sMcDonald&#39;s!5e0!3m2!1ses!2ses!4v1581962833647!5m2!1ses!2ses" width="350" height="400" frameborder="0"></iframe>
+                &nbsp;
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12688.016742488533!2d-5.9873541!3d37.3424096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x43c138e93e3972fe!2sPans%20%26%20Company!5e0!3m2!1ses!2ses!4v1582127856743!5m2!1ses!2ses" width="350" height="400" frameborder="0"></iframe>
+            
+            </div>
+        </div>
+    </div>
+</div>
